@@ -102,7 +102,7 @@ public class Player extends Entity
             }
             if (direction == "down")
             {
-                WorldY = WorldY +speed;
+                WorldY = WorldY + speed;
             }
             if (direction == "left")
             {

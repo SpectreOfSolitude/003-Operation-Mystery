@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 
 import entity.Entity;
 import entity.Player;
+import object.SuperObject;
 import tile.TileManager;
 
 import java.awt.Color;
@@ -45,8 +46,14 @@ public class GamePanel extends JPanel implements Runnable
     // Game Thread
     Thread gameThread;
 
+    //Object Placement On the Map
+    public ObjectPlacement ObjectMapping = new ObjectPlacement(this);
+
     // Player
     public Player player = new Player(this,keyH);
+
+    // Object
+    public SuperObject obj[] = new SuperObject[10];
 
     public GamePanel()
     {
@@ -55,6 +62,11 @@ public class GamePanel extends JPanel implements Runnable
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
+    }
+
+    public void SetUpGame()
+    {
+        ObjectMapping.setObject();
     }
 
     public void startGameThread()
@@ -150,9 +162,20 @@ public class GamePanel extends JPanel implements Runnable
 
         Graphics2D g2D = (Graphics2D)graph;
         
+        //tiles
         tileM.draw(g2D);
         
+        //player
         player.draw(g2D);
+
+        //objects
+        for(int i = 0; i < obj.length; i++)
+        {
+            if (obj[i] != null)
+            {
+                obj[i].draw(g2D, this);
+            }
+        }
 
         g2D.dispose();
     }

@@ -8,7 +8,7 @@ public class Main
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         window.setResizable(false);
-        window.setTitle("Project Mystery");
+        window.setTitle("Operation Mystery");
         
         GamePanel Panel = new GamePanel();
         window.add(Panel);
@@ -18,6 +18,7 @@ public class Main
         window.setLocationRelativeTo(null);
         window.setVisible(true);
 
+        Panel.SetUpGame();
         Panel.startGameThread();
     }
 }
