@@ -64,9 +64,95 @@ public class CollisionChecker
                     entity.collisionOn = true;
                 }
                 break;
-        
-            default:
-                break;
         }
+    }
+    public int checkObject(Entity entity, boolean player)
+    {
+      int index = 999;
+      
+      for(int i=0; i < gp.obj.length; i++)
+      {
+        if(gp.obj[i] != null)
+        {
+            // Get Entity's Solid Area Position
+            entity.SolidArea.x = entity.WorldX + entity.SolidArea.x;
+            entity.SolidArea.y = entity.WorldY + entity.SolidArea.y;
+            // Get the Object's Solid Area Position
+            {
+                gp.obj[i].SolidArea.x = gp.obj[i].worldX + gp.obj[i].SolidArea.x;
+                gp.obj[i].SolidArea.y = gp.obj[i].worldY + gp.obj[i].SolidArea.y;
+
+                switch(entity.direction)
+                {
+                    case "up":
+                        entity.SolidArea.y = entity.SolidArea.y - entity.speed;
+                        if(entity.SolidArea.intersects(gp.obj[i].SolidArea))
+                        {
+                            if(gp.obj[i].collision == true)
+                            {
+                                entity.collisionOn = true;
+                            }
+
+                            if(player == true)
+                            {
+                                index = i;
+                            }
+                        }
+                        break;
+                    case "down":
+                        entity.SolidArea.y = entity.SolidArea.y + entity.speed;
+                        if(entity.SolidArea.intersects(gp.obj[i].SolidArea))
+                        {
+                            if(gp.obj[i].collision == true)
+                            {
+                                entity.collisionOn = true;
+                            }
+
+                            if(player == true)
+                            {
+                                index = i;
+                            }
+                        }
+                        break;
+                    case "left":
+                        entity.SolidArea.x = entity.SolidArea.x - entity.speed;
+                        if(entity.SolidArea.intersects(gp.obj[i].SolidArea))
+                        {
+                            if(gp.obj[i].collision == true)
+                            {
+                                entity.collisionOn = true;
+                            }
+                            
+                            if(player == true)
+                            {
+                                index = i;
+                            }
+                        }
+                        break;
+                    case "right":
+                        entity.SolidArea.x = entity.SolidArea.x + entity.speed;
+                        if(entity.SolidArea.intersects(gp.obj[i].SolidArea))
+                        {
+                            if(gp.obj[i].collision == true)
+                            {
+                                entity.collisionOn = true;
+                            }
+                            
+                            if(player == true)
+                            {
+                                index = i;
+                            }
+                        }
+                        break;
+                }
+            }
+            entity.SolidArea.x = entity.SolidAreaDefaultX;
+            entity.SolidArea.y = entity.SolidAreaDefaultY;
+            gp.obj[i].SolidArea.x = gp.obj[i].SolidAreaDefaultX;
+            gp.obj[i].SolidArea.y = gp.obj[i].SolidAreaDefaultY;
+        }
+      }
+
+      return index;
     }
 }

@@ -17,6 +17,8 @@ public class Player extends Entity
     
     public final int screenX;
     public final int screenY;
+
+    int HasKey = 0;
     
     public Player(GamePanel gp, KeyHandler keyH)
     {
@@ -26,7 +28,13 @@ public class Player extends Entity
         screenX = gp.screenWidth/2 - (gp.tileSize/2);
         screenY = gp.screenHeight/2- (gp.tileSize/2);
 
-        SolidArea = new Rectangle(8, 16, 32, 32);
+        SolidArea = new Rectangle();
+        SolidArea.x = 8;
+        SolidArea.y = 16;
+        SolidAreaDefaultX = SolidArea.x;
+        SolidAreaDefaultY = SolidArea.y;
+        SolidArea.width = 32;
+        SolidArea.height = 32;
 
         setDefaultValues();
         getPlayerImage();
@@ -34,8 +42,8 @@ public class Player extends Entity
 
     public void setDefaultValues()
     {
-        WorldX = gp.tileSize*10;
-        WorldY = gp.tileSize*8;
+        WorldX = gp.tileSize*23;
+        WorldY = gp.tileSize*21;
         speed = 4;
         direction = "down";
     }
@@ -67,68 +75,102 @@ public class Player extends Entity
 
             if(keyH.upPressed == true)
             {
-            direction = "up";
+                direction = "up";
+            }
+
+            if(keyH.downPressed == true)
+            {
+                direction = "down";
+
+            }
             
-        }
+            if(keyH.leftPressed == true)
+            {
+                direction = "left";
 
-        if(keyH.downPressed == true)
-        {
-            direction = "down";
+            }
+            
+            if(keyH.rightPressed)
+            {
+                direction = "right";
 
-        }
+            }
+
+            // CHECKING TILE COLLISION
+            collisionOn = false;
+            gp.ColChecker.checkTile(this);
+
+            //CHECK OBJECT COLLISION
+            int objIndex = gp.ColChecker.checkObject(this, true);
+            pickUpObject(objIndex);
+
+            // IF COLLISION IS FALSE, PLAYER CAN MOVE
+            if(collisionOn == false)
+            {
+                if (direction == "up")
+                {
+                    WorldY = WorldY - speed;
+                }
+                if (direction == "down")
+                {
+                    WorldY = WorldY + speed;
+                }
+                if (direction == "left")
+                {
+                    WorldX = WorldX - speed;  
+                }
+                if (direction == "right")
+                {
+                    WorldX = WorldX + speed;    
+                }
+            }
         
-        if(keyH.leftPressed == true)
-        {
-            direction = "left";
-
-        }
-        
-        if(keyH.rightPressed)
-        {
-            direction = "right";
-
-        }
-
-        // CHECKING TILE COLLISION
-        collisionOn = false;
-        gp.ColChecker.checkTile(this);
-
-        // IF COLLISION IS FALSE, PLAYER CAN MOVE
-        if(collisionOn == false)
-        {
-            if (direction == "up")
+            spriteCounter = spriteCounter + 1;
+            if(spriteCounter > 12)
             {
-                WorldY = WorldY - speed;
+                if(spriteNum == 1)
+                {
+                    spriteNum =2;
+                }
+                else if (spriteNum == 2)
+                {
+                    spriteNum = 1;
+                }
+                spriteCounter = 0;
             }
-            if (direction == "down")
-            {
-                WorldY = WorldY + speed;
-            }
-            if (direction == "left")
-            {
-                WorldX = WorldX - speed;  
-            }
-            if (direction == "right")
-            {
-                WorldX = WorldX + speed;    
-            }
-        }
-        
-        spriteCounter = spriteCounter + 1;
-        if(spriteCounter > 12)
-        {
-            if(spriteNum == 1)
-            {
-                spriteNum =2;
-            }
-            else if (spriteNum == 2)
-            {
-                spriteNum = 1;
-            }
-            spriteCounter = 0;
         }
     }
-}
+
+    public void pickUpObject(int i)
+    {
+        if(i != 999)
+        {
+            String objectName = gp.obj[i].name;
+            switch(objectName)
+            {
+                case "Key":
+                    gp.playSE(1);
+                    HasKey++;
+                    gp.obj[i] = null;
+                    System.out.println("Key: "+ HasKey);
+                    break;
+                case "Door":
+                    gp.playSE(1);
+                    if(HasKey > 0)
+                    {
+                        gp.obj[i] = null;
+                        HasKey = HasKey - 1;
+                        System.out.println("Key: "+ HasKey);
+                    }
+                    break;
+                case "Boots":
+                    gp.playSE(1);
+                    speed = speed + 2;
+                    gp.obj[i] = null;
+                    break;
+            }
+        }
+    }
 
     public void draw(Graphics2D G2D)
     {
