@@ -40,7 +40,8 @@ public class GamePanel extends JPanel implements Runnable
     // KeyHandler
     KeyHandler keyH = new KeyHandler();
 
-    Sound sound = new Sound();
+    Sound BGM = new Sound();
+    Sound SE = new Sound();
 
     // Collision Checker
     public CollisionChecker ColChecker = new CollisionChecker(this);
@@ -50,6 +51,9 @@ public class GamePanel extends JPanel implements Runnable
 
     //Object Placement On the Map
     public ObjectPlacement ObjectMapping = new ObjectPlacement(this);
+
+    // UI
+    public UI ui = new UI(this);
 
     // Player
     public Player player = new Player(this,keyH);
@@ -180,24 +184,25 @@ public class GamePanel extends JPanel implements Runnable
         //player
         player.draw(g2D);
 
+        ui.draw(g2D);
         g2D.dispose();
     }
 
     public void PlayMusic(int i)
     {
-        sound.setFile(i);
-        sound.play();
-        sound.loop();
+        BGM.setFile(i);
+        BGM.play();
+        BGM.loop();
     }
 
     public void stopMusic ()
     {
-        sound.stop();
+        BGM.stop();
     }
 
     public void playSE(int i)
     {
-        sound.setFile(i);
-        sound.play();
+        SE.setFile(i);
+        SE.play();
     }
 }
