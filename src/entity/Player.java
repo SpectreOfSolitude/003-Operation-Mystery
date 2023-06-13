@@ -18,7 +18,7 @@ public class Player extends Entity
     public final int screenX;
     public final int screenY;
 
-    int HasKey = 0;
+    public int HasKey = 0;
     
     public Player(GamePanel gp, KeyHandler keyH)
     {
@@ -152,7 +152,7 @@ public class Player extends Entity
                     gp.playSE(1);
                     HasKey++;
                     gp.obj[i] = null;
-                    System.out.println("Key: "+ HasKey);
+                    gp.ui.showMessage("New key picked up");
                     break;
                 case "Door":
                     gp.playSE(1);
