@@ -40,6 +40,7 @@ public class GamePanel extends JPanel implements Runnable
     // KeyHandler
     KeyHandler keyH = new KeyHandler();
 
+    // AUDIO
     Sound BGM = new Sound();
     Sound SE = new Sound();
 

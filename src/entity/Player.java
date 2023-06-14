@@ -175,6 +175,8 @@ public class Player extends Entity
                     break;
                 case "Chest":
                     gp.ui.gameFinished = true;
+                    gp.stopMusic();
+                    break;
             }
         }
     }
