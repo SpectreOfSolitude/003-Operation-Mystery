@@ -2,7 +2,6 @@ package main;
 
 import javax.swing.JPanel;
 
-import entity.Entity;
 import entity.Player;
 import object.SuperObject;
 import tile.TileManager;
@@ -60,7 +59,7 @@ public class GamePanel extends JPanel implements Runnable
     public Player player = new Player(this,keyH);
 
     // Object
-    public SuperObject obj[] = new SuperObject[10];
+    public SuperObject obj[] = new SuperObject[30];
 
     public GamePanel()
     {

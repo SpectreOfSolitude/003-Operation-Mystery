@@ -13,7 +13,7 @@ public class Sound
 
     public Sound()
     {
-        soundURL[0] = getClass().getResource("/res/sound/FieldMusic.wav");
+        soundURL[0] = getClass().getResource("/res/sound/AdasTheme.wav");
         soundURL[1] = getClass().getResource("/res/sound/itemSE.wav");
     }
 
