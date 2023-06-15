@@ -1,7 +1,6 @@
 package entity;
 
 import java.awt.Graphics2D;
-import java.awt.Panel;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
@@ -22,6 +21,7 @@ public class Player extends Entity
     
     public Player(GamePanel gp, KeyHandler keyH)
     {
+        super(gp);
         this.gp = gp;
         this.keyH = keyH;
 
@@ -141,7 +141,7 @@ public class Player extends Entity
         }
     }
 
-    public void pickUpObject(int i)
+    private void pickUpObject(int i)
     {
         if(i != 999)
         {
@@ -149,6 +149,7 @@ public class Player extends Entity
             switch(objectName)
             {
                 case "Key":
+                    gp.gameState = gp.dialogueState;
                     gp.playSE(1);
                     HasKey++;
                     gp.obj[i] = null;
@@ -179,6 +180,14 @@ public class Player extends Entity
                     break;
             }
         }
+    }
+
+    private void PlayerInteractions(int i)
+    {
+        if(i != 999)
+        {
+            gp.gameState = gp.dialogueState;
+        }     
     }
 
     public void draw(Graphics2D G2D)
