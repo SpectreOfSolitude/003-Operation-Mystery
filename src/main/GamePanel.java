@@ -55,11 +55,20 @@ public class GamePanel extends JPanel implements Runnable
     // UI
     public UI ui = new UI(this);
 
+    // ====== ENTITY AND OBJECT ========
+
     // Player
     public Player player = new Player(this,keyH);
 
     // Object
     public SuperObject obj[] = new SuperObject[30];
+
+    // ==================================
+
+    // GAME STATE
+    public int gameState;
+    public final int playState = 1;
+    public final int pauseState = 2;
 
     public GamePanel()
     {
