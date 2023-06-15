@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -10,6 +11,7 @@ import object.KEY;
 public class UI 
 {
     GamePanel gp;
+    Graphics2D G2D;
     Font arial_40;
     Font arial_80;
     BufferedImage keyImage;
@@ -35,21 +37,29 @@ public class UI
 
     public void draw (Graphics2D G2D)
     {
-        if (gameFinished == true)
+        this.G2D = G2D;
+
+        if(gp.gameState == gp.playState)
         {
-            String text;
-            int textLength;
-            
-            
-            G2D.setFont(new Font("Arial", Font.PLAIN, 40));
-            G2D.setColor(Color.white);
-            text = "Rakesh will be back...";
-            textLength = (int)G2D.getFontMetrics().getStringBounds(text, G2D).getWidth();
-            int y = gp.screenHeight/2 - (gp.tileSize*3);
-            int x = gp.screenWidth/2 - textLength/2;
-            G2D.drawString(text, x, y);
+            // playstate stuff
+        }
+
+        if(gp.gameState == gp.pauseState)
+        {
+            DrawPauseScreen();    
+        }
+
+        if (gp.gameState == gp.dialogueState)
+        {
 
         }
+
+        if (gameFinished == true)
+        {
+            gp.gameState = gp.endState;
+            DrawEndScreen();
+        }
+
 
         else
         {
@@ -77,4 +87,57 @@ public class UI
 
     }
 
+        public void DrawEndScreen()
+    {
+            String text;
+            int textLength;
+            
+            G2D.setFont(new Font("Arial", Font.PLAIN, 40));
+            G2D.setColor(Color.white);
+            text = "Rakesh will be back...";
+            textLength = (int)G2D.getFontMetrics().getStringBounds(text, G2D).getWidth();
+            int y = gp.screenHeight/2 - (gp.tileSize*3);
+            int x = gp.screenWidth/2 - textLength/2;
+            G2D.drawString(text, x, y);
+    }    
+
+    public void DrawPauseScreen()
+    {
+        String text = "PAUSED";
+        
+        G2D.setFont(G2D.getFont().deriveFont(Font.PLAIN, 80));
+        G2D.setColor(Color.white);
+        int x = getXforCenteredText(text);
+        int y = gp.screenHeight/2;
+        G2D.drawString(text, x, y);
+    }    
+
+    public void DrawDialogueScreen()
+    {
+        int x = gp.tileSize*2;
+        int y = gp.tileSize*6;
+        int width = gp.screenWidth - (gp.tileSize*4);
+        int height = gp.tileSize*4;
+
+        drawSubWindow(x, y, width, height);
+    }
+
+    private void drawSubWindow(int x, int y, int width, int height)
+    {
+        Color WindowColor = new Color (0, 0, 0);
+        G2D.setColor(WindowColor);
+        G2D.fillRoundRect(x, y, width, height, 35, 35);
+
+        WindowColor = new Color (255, 255, 255);
+        G2D.setStroke(new BasicStroke(5));
+        G2D.drawRoundRect(x+5, y+5, width-10, height-10, 25, 25);
+    }
+
+    private int getXforCenteredText(String text)
+    {
+        int x;
+        int length = (int)G2D.getFontMetrics().getStringBounds(text, G2D).getWidth();
+        x = gp.screenWidth/2 - length/2;
+        return x;
+    }
 }
