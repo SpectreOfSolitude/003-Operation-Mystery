@@ -3,6 +3,7 @@ package main;
 import object.BOOTS;
 import object.CHEST;
 import object.DOOR;
+import object.IRONDOOR;
 import object.KEY;
 
 public class ObjectPlacement 
