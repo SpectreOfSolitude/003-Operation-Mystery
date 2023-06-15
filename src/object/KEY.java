@@ -26,10 +26,11 @@ public class KEY extends SuperObject
 
     public void setMonologue()
     {
-        monologues[0] = " Gelang?......";
-	    monologues[1] = "kenapa gelang ini membuatku merasa gelisah ….";
-	    monologues[2] = "Apa aku kehilangan sesuatu yang sangat berarti ? tapi apa ? hmmm… ";
-        monologues[3] = "Ah biar lah, kalau aku tidak ingat berarti tidak penting. Dilihat lihat bagus juga nih gelangnya aku pakai saja ah";
+        monologues[0] = " Gelang..?";
+	    monologues[1] = "kenapa gelang ini \nmembuatku merasa gelisah…";
+	    monologues[2] = "Apa aku telah kehilangan \nsesuatu yang sangat berarti? \ntapi apa? hmmm… ";
+        monologues[3] = "Ah sudahlah. kalau aku tidak \ningat, berarti tidak penting.";
+        monologues[3] = "Dilihat-lihat, bagus juga nih \ngelangnya. aku pakai saja.";
 
     }
 

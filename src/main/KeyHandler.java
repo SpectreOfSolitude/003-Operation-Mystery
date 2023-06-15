@@ -44,11 +44,16 @@ public class KeyHandler implements KeyListener
             {
                 rightPressed = true;
             }
-
+            
             if(code == KeyEvent.VK_P)
             {   
-               gp.gameState= gp.pauseState;    
-            } 
+                gp.gameState= gp.pauseState;    
+            }
+
+            if (code == KeyEvent.VK_C || code == KeyEvent.VK_SPACE || code == KeyEvent.VK_ENTER)
+            {
+                enterPressed = true;
+            }
         }
 
         // Pause
@@ -58,17 +63,14 @@ public class KeyHandler implements KeyListener
             {
                 gp.gameState= gp.playState;
             }    
-        }
-        
+        }        
         else if(gp.gameState == gp.dialogueState)
         {
-
-            if (code == KeyEvent.VK_C || code == KeyEvent.VK_SPACE || code == KeyEvent.VK_ENTER)
+            if (code == KeyEvent.VK_ENTER|| code == KeyEvent.VK_SPACE || code == KeyEvent.VK_C )
             {
-                enterPressed = true;
-                gp.gameState= gp.playState;    
+                gp.gameState = gp.playState;
             }
-        }        
+        }
     }    
     
 
@@ -93,6 +95,35 @@ public class KeyHandler implements KeyListener
         {
             rightPressed = false;
         }
+        if(code == KeyEvent.VK_UP)
+        {
+            upPressed = false;
+        }
+        if(code == KeyEvent.VK_DOWN)
+        {
+            downPressed = false;
+        }
+        if(code == KeyEvent.VK_RIGHT)
+        {
+            rightPressed = false;
+        }
+        if(code == KeyEvent.VK_LEFT)
+        {
+            leftPressed = false;
+        }
+        if (code == KeyEvent.VK_C)
+        {
+            enterPressed = false;
+        }
+        if (code == KeyEvent.VK_SPACE)
+        {
+            enterPressed = false;
+        }
+        if (code == KeyEvent.VK_ENTER)
+        {
+            enterPressed = false;
+        }
+
     }
     
 }

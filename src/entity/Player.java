@@ -140,7 +140,7 @@ public class Player extends Entity
             }
         }
     }
-
+    private int interactionTotal = 0;
     private void pickUpObject(int i)
     {
         if(i != 999)
@@ -149,12 +149,17 @@ public class Player extends Entity
             switch(objectName)
             {
                 case "Key":
+                    gp.playSE(1);
                     gp.gameState = gp.dialogueState;
                     gp.obj[i].monologue();
-                    gp.playSE(1);
-                    HasKey++;
-                    gp.obj[i] = null;
-                    gp.ui.showMessage("New key picked up");
+                    interactionTotal++;
+                    if (interactionTotal == 4)
+                    {
+                        interactionTotal = 0;
+                        gp.obj[i] = null;
+                        gp.ui.showMessage("New key picked up");
+                        HasKey++;
+                    }
                     break;
                 case "Door":
                     gp.playSE(1);

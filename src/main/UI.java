@@ -125,7 +125,12 @@ public class UI
         G2D.setFont(G2D.getFont().deriveFont(Font.PLAIN,32F));
         x = x + gp.tileSize;
         y = y + gp.tileSize;
-        G2D.drawString(currentDialogue, x, y);
+
+        for(String line : currentDialogue.split("\n"))
+        {
+            G2D.drawString(line, x, y);
+            y = y + 40;
+        }
     }
 
     private void drawSubWindow(int x, int y, int width, int height)
