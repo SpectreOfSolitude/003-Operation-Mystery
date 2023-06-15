@@ -150,6 +150,7 @@ public class Player extends Entity
             {
                 case "Key":
                     gp.gameState = gp.dialogueState;
+                    gp.obj[i].monologue();
                     gp.playSE(1);
                     HasKey++;
                     gp.obj[i] = null;
@@ -182,13 +183,13 @@ public class Player extends Entity
         }
     }
 
-    private void PlayerInteractions(int i)
-    {
-        if(i != 999)
-        {
-            gp.gameState = gp.dialogueState;
-        }     
-    }
+    // private void PlayerInteractions(int i)
+    // {
+    //     if(i != 999)
+    //     {
+    //         gp.gameState = gp.dialogueState;
+    //     }     
+    // }
 
     public void draw(Graphics2D G2D)
     {

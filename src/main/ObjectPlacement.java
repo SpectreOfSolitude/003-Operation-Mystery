@@ -16,15 +16,15 @@ public class ObjectPlacement
 
     public void setObject()
     {
-        gp.obj[0] = new KEY();
+        gp.obj[0] = new KEY(gp);
         gp.obj[0].worldX = 23 *gp.tileSize;
         gp.obj[0].worldY = 7 * gp.tileSize;
 
-        gp.obj[1] = new KEY();
+        gp.obj[1] = new KEY(gp);
         gp.obj[1].worldX = 23 *gp.tileSize;
         gp.obj[1].worldY = 40 * gp.tileSize;
 
-        gp.obj[2] = new KEY();
+        gp.obj[2] = new KEY(gp);
         gp.obj[2].worldX = 37 *gp.tileSize;
         gp.obj[2].worldY = 7 * gp.tileSize;
 

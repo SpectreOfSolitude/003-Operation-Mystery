@@ -15,6 +15,13 @@ public class SuperObject
     public Rectangle SolidArea = new Rectangle(0, 0, 48, 48);
     public int SolidAreaDefaultX = 0;
     public int SolidAreaDefaultY = 0;
+    public int actionLockCounter = 0;
+    public String monologues[] = new String[20];
+    public int monologueIndex = 0;
+
+    public void setAction(){}
+    public void monologue(){}
+    public void update(){}
     
     public void draw(Graphics2D G2D, GamePanel gp)
     {

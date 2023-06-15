@@ -19,13 +19,14 @@ public class UI
     public String message = "";
     int messageCounter = 0;
     public boolean gameFinished = false;
+    public String currentDialogue = "";
 
     public UI(GamePanel gp)
     {
         this.gp = gp;
         arial_40 = new Font("Arial", Font.PLAIN, 40);
         arial_40 = new Font("Arial", Font.BOLD, 80);
-        KEY key = new KEY();
+        KEY key = new KEY(gp);
         keyImage = key.image;
     }
 
@@ -51,7 +52,7 @@ public class UI
 
         if (gp.gameState == gp.dialogueState)
         {
-
+            DrawDialogueScreen();
         }
 
         if (gameFinished == true)
@@ -115,20 +116,26 @@ public class UI
     public void DrawDialogueScreen()
     {
         int x = gp.tileSize*2;
-        int y = gp.tileSize*6;
+        int y = gp.tileSize*7;
         int width = gp.screenWidth - (gp.tileSize*4);
         int height = gp.tileSize*4;
 
         drawSubWindow(x, y, width, height);
+
+        G2D.setFont(G2D.getFont().deriveFont(Font.PLAIN,32F));
+        x = x + gp.tileSize;
+        y = y + gp.tileSize;
+        G2D.drawString(currentDialogue, x, y);
     }
 
     private void drawSubWindow(int x, int y, int width, int height)
     {
-        Color WindowColor = new Color (0, 0, 0);
+        Color WindowColor = new Color (0, 0, 0, 210);
         G2D.setColor(WindowColor);
         G2D.fillRoundRect(x, y, width, height, 35, 35);
 
         WindowColor = new Color (255, 255, 255);
+        G2D.setColor(WindowColor);
         G2D.setStroke(new BasicStroke(5));
         G2D.drawRoundRect(x+5, y+5, width-10, height-10, 25, 25);
     }
