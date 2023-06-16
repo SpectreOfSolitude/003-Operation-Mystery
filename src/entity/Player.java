@@ -157,14 +157,41 @@ public class Player extends Entity
                     {
                         interactionTotal = 0;
                         gp.obj[i] = null;
+                        gp.ui.showMessage("Key Object acquired");
+                        HasKey++;
+                    }
+                    break;
+                case "Baju":
+                    gp.playSE(1);
+                    gp.gameState = gp.dialogueState;
+                    gp.obj[i].monologue();
+                    interactionTotal++;
+                    if (interactionTotal == 9)
+                    {
+                        interactionTotal = 0;
+                        gp.obj[i] = null;
+                        speed = speed + 2;
+                        gp.ui.showMessage("Key Object acquired");
+                        HasKey++;
+                    }
+                    break;
+                case "Pisau":
+                    gp.playSE(1);
+                    gp.gameState = gp.dialogueState;
+                    gp.obj[i].monologue();
+                    interactionTotal++;
+                    if (interactionTotal == 7)
+                    {
+                        interactionTotal = 0;
+                        gp.obj[i] = null;
                         gp.ui.showMessage("New key picked up");
                         HasKey++;
                     }
                     break;
                 case "Door":
-                    gp.playSE(1);
                     if(HasKey > 0)
                     {
+                        gp.playSE(1);
                         gp.obj[i] = null;
                         HasKey = HasKey - 1;
                         gp.ui.showMessage("Door Unlocked");
@@ -177,8 +204,8 @@ public class Player extends Entity
                 case "Boots":
                     gp.playSE(1);
                     speed = speed + 2;
-                    gp.obj[i] = null;
                     gp.ui.showMessage("Boots acquired");
+                    gp.obj[i] = null;
                     break;
                 case "Chest":
                     gp.ui.gameFinished = true;
