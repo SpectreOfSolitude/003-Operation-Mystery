@@ -140,7 +140,7 @@ public class Player extends Entity
             }
         }
     }
-
+    private int interactionTotal = 0;
     private void pickUpObject(int i)
     {
         if(i != 999)
@@ -149,16 +149,62 @@ public class Player extends Entity
             switch(objectName)
             {
                 case "Key":
-                    gp.gameState = gp.dialogueState;
                     gp.playSE(1);
-                    HasKey++;
-                    gp.obj[i] = null;
-                    gp.ui.showMessage("New key picked up");
+                    gp.gameState = gp.dialogueState;
+                    gp.obj[i].monologue();
+                    interactionTotal++;
+                    if (interactionTotal == 4)
+                    {
+                        interactionTotal = 0;
+                        gp.obj[i] = null;
+                        gp.ui.showMessage("Key Object acquired");
+                        HasKey++;
+                    }
+                    break;
+                    case "Gelang":
+                    gp.playSE(1);
+                    gp.gameState = gp.dialogueState;
+                    gp.obj[i].monologue();
+                    interactionTotal++;
+                    if (interactionTotal == 4)
+                    {
+                        interactionTotal = 0;
+                        gp.obj[i] = null;
+                        gp.ui.showMessage("Key Object acquired");
+                        HasKey++;
+                    }
+                    break;
+                case "Baju":
+                    gp.playSE(1);
+                    gp.gameState = gp.dialogueState;
+                    gp.obj[i].monologue();
+                    interactionTotal++;
+                    if (interactionTotal == 9)
+                    {
+                        interactionTotal = 0;
+                        gp.obj[i] = null;
+                        speed = speed + 2;
+                        gp.ui.showMessage("Key Object acquired");
+                        HasKey++;
+                    }
+                    break;
+                case "Pisau":
+                    gp.playSE(1);
+                    gp.gameState = gp.dialogueState;
+                    gp.obj[i].monologue();
+                    interactionTotal++;
+                    if (interactionTotal == 7)
+                    {
+                        interactionTotal = 0;
+                        gp.obj[i] = null;
+                        gp.ui.showMessage("New key picked up");
+                        HasKey++;
+                    }
                     break;
                 case "Door":
-                    gp.playSE(1);
                     if(HasKey > 0)
                     {
+                        gp.playSE(1);
                         gp.obj[i] = null;
                         HasKey = HasKey - 1;
                         gp.ui.showMessage("Door Unlocked");
@@ -171,8 +217,8 @@ public class Player extends Entity
                 case "Boots":
                     gp.playSE(1);
                     speed = speed + 2;
-                    gp.obj[i] = null;
                     gp.ui.showMessage("Boots acquired");
+                    gp.obj[i] = null;
                     break;
                 case "Chest":
                     gp.ui.gameFinished = true;
@@ -182,13 +228,13 @@ public class Player extends Entity
         }
     }
 
-    private void PlayerInteractions(int i)
-    {
-        if(i != 999)
-        {
-            gp.gameState = gp.dialogueState;
-        }     
-    }
+    // private void PlayerInteractions(int i)
+    // {
+    //     if(i != 999)
+    //     {
+    //         gp.gameState = gp.dialogueState;
+    //     }     
+    // }
 
     public void draw(Graphics2D G2D)
     {

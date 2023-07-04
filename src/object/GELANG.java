@@ -4,17 +4,17 @@ import javax.imageio.ImageIO;
 
 import main.GamePanel;
 
-public class KEY extends SuperObject
+public class GELANG extends SuperObject
 {
     GamePanel gp;
 
-    public KEY(GamePanel gp)
+    public GELANG(GamePanel gp)
     {
         this.gp = gp;
-        name = "Key";
+        name = "Gelang";
         try 
         {
-            image = ImageIO.read(getClass().getResourceAsStream("/res/objects/key.png"));
+            image = ImageIO.read(getClass().getResourceAsStream("/res/objects/shield_blue.png"));
         } 
         catch (Exception e) 
         {
@@ -26,11 +26,11 @@ public class KEY extends SuperObject
 
     public void setMonologue()
     {
-        monologues[0] = " Gelang..?";
-	    monologues[1] = "kenapa gelang ini \nmembuatku merasa gelisah…";
+        monologues[0] = " Cincin..?";
+	    monologues[1] = "kenapa cincin ini \nmembuatku merasa gelisah…";
 	    monologues[2] = "Apa aku telah kehilangan \nsesuatu yang sangat berarti? \ntapi apa? hmmm… ";
         monologues[3] = "Ah sudahlah. kalau aku tidak \ningat, berarti tidak penting.";
-        monologues[3] = "Dilihat-lihat, bagus juga nih \ngelangnya. aku pakai saja.";
+        monologues[3] = "Dilihat-lihat, bagus juga nih \ncincinnya. aku pakai saja.";
 
     }
 
