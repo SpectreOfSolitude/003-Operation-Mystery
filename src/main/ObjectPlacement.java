@@ -2,11 +2,11 @@ package main;
 
 import entity.yuki;
 import object.BAJU;
-import object.BOOTS;
+//import object.BOOTS;
 import object.CHEST;
 import object.DOOR;
 import object.GELANG;
-import object.KEY;
+//import object.KEY;
 import object.PISAU;
 
 public class ObjectPlacement 
@@ -51,8 +51,8 @@ public class ObjectPlacement
 
     public void setNPC()
     {
-        // gp.npc[0] = new yuki(gp);
-        // gp.npc[0].worldX = 21*gp.tileSize;
-        // gp.npc[0].worldY = 21*gp.tileSize;
+        gp.npc[0] = new yuki(gp);
+        gp.npc[0].worldX = 21*gp.tileSize;
+        gp.npc[0].worldY = 21*gp.tileSize;
     }
 }

@@ -161,6 +161,19 @@ public class Player extends Entity
                         HasKey++;
                     }
                     break;
+                    case "Gelang":
+                    gp.playSE(1);
+                    gp.gameState = gp.dialogueState;
+                    gp.obj[i].monologue();
+                    interactionTotal++;
+                    if (interactionTotal == 4)
+                    {
+                        interactionTotal = 0;
+                        gp.obj[i] = null;
+                        gp.ui.showMessage("Key Object acquired");
+                        HasKey++;
+                    }
+                    break;
                 case "Baju":
                     gp.playSE(1);
                     gp.gameState = gp.dialogueState;
